@@ -1,4 +1,4 @@
-hr{
+#hr{
   border-top: 3px solid black;
 }
 
@@ -27,7 +27,12 @@ hr{
 
 .button:hover{
   background-color: gray;
-  color: white;
-  
-  
+  color: white; 
+}
+
+.eachTodo{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+
 }

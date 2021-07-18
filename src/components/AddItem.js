@@ -18,10 +18,6 @@ export default class AddItem  extends React.Component{
                             </b>
                         </button>
                     </div>
-                   
-
-
-
                 </div>
             </>
         )

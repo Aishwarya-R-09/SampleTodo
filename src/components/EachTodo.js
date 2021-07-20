@@ -9,18 +9,19 @@ export default class EachTodo extends React.Component{
         return(
             <div className="eachTodo">
                 <div>
-                    <input type="checkbox" style={{ marginRight : "30px"}}/>
+                    <input type="checkbox" style={{ marginRight : "30px"}} checked={this.props.type==="completed"} readonly={this.props.type==="completed"}/>
 
-                    <input className={this.state.editMode ? "input":"no-input"} value={this.state.newValue} 
-                    onChange={(event)=>{this.setState({newValue:event.target.value})}} readOnly={!this.state.editMode}/>
+                    <input className={this.state.editMode ? "input": this.props.type==="completed" ? "strike no-input" : "no-input"} 
+                    value={this.state.newValue} onChange={(event)=>{this.setState({newValue:event.target.value})}} 
+                    readOnly={!this.state.editMode}/>
                     
                 </div>
                 {!this.state.editMode && <div>
-                    <button class="button" onClick={()=>{this.setState({editMode:true})}}>
+                    {this.props.type==="progress" && <button class="button" onClick={()=>{this.setState({editMode:true})}}>
                         <b>
                             Edit
                         </b>
-                    </button>
+                    </button>}
                     <button class="button">
                         <b>
                             Delete

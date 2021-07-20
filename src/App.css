@@ -3,7 +3,7 @@
 }
 
 .container{
-  margin-top: 50px;
+  margin-bottom: 60px;
   width: 60%;
 }
 
@@ -29,6 +29,10 @@
   padding: 10px;
   height: 40px;
   border: 0px;
+}
+
+.strike{
+  text-decoration: line-through;
 }
 
 .no-input:focus{

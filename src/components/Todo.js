@@ -6,7 +6,7 @@ export default class Todo extends React.Component{
     constructor(props){
         super(props);
         this.state = {
-            todoArr : ["Pay bills", "Go Shopping", "Complete Project", "Ride Bike"]
+            todoArr : ["Go Shopping", "Complete Project", "Ride Bike"]
         }
 
     }
@@ -21,7 +21,7 @@ export default class Todo extends React.Component{
                     {this.state.todoArr.map((item, index)=>{
                         return (
                             <>
-                                <EachTodo item={item} index={index}/>
+                                <EachTodo item={item} index={index} type="progress"/>
                                 <hr style={{ margin: "20px 0"}}/>
                             </>
                         )

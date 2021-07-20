@@ -1,3 +1,5 @@
+//Redux reducer
+//Actual logic to perform operations on redux store
 const reducer = (
     state = { tasks: [ {name: "Pay bills",status:"progress"}, {name:"Ride bike",status:"progress"},
      {name:"Shopping",status:"completed"}, {name:"See the doctor",status:"completed"} ] },

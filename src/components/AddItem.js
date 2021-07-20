@@ -3,14 +3,17 @@ import '../App.css';
 import { connect } from 'react-redux';
 import { addItem } from '../Actions/index';
 
+
+//Component to add a new Todo task
 class AddItem  extends React.Component{
     constructor(props){
         super(props);
-        
-        this.state= {task:""}
+        this.state = {
+            task : ""
+        }
     }
-
-    addTask = ()=>{
+    //function to add a new task to redux store
+    addTask = () => {
         const { dispatch } = this.props;
         dispatch(addItem(this.state.task));
         this.setState({task:""});
@@ -25,7 +28,7 @@ class AddItem  extends React.Component{
                     </h4>
                     <hr id="hr" />
                     <div className="row justify-content-between">
-                        <input className="input col-7 col-sm-8 col-md-9 col-lg-10" type="text" value={this.state.task}
+                        <input className="input col-8 col-md-9 col-lg-10" type="text" value={this.state.task}
                         onChange={(event)=>{this.setState({task: event.target.value})}}/>
                         <button className="button col-auto" onClick={this.addTask}>
                             <b>

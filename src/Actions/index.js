@@ -1,3 +1,4 @@
+//redux actions to add, update, delete task from store
 export const addItem = (item) => {
     return {
       type: 'Add Item',

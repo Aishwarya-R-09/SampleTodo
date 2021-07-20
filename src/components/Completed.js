@@ -4,9 +4,6 @@ import EachTodo from './EachTodo';
 export default class Completed extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            completedArr : ["Pay bills"]
-        }
     }
     render(){
         return(
@@ -16,12 +13,12 @@ export default class Completed extends React.Component{
                         COMPLETED
                     </h4>
                     <hr id="hr" style={{marginBottom:"25px"}}/>
-                    {this.state.completedArr.map((item, index)=>{
+                    {this.props.arr.map((item)=>{
                         return (
-                            <>
-                                <EachTodo item={item} index={index} type="completed"/>
+                            <React.Fragment key={item[1]}>
+                                <EachTodo item={item[0]} index={item[1]} type="completed"/>
                                 <hr style={{ margin: "20px 0"}}/>
-                            </>
+                            </React.Fragment>
                         )
                     })}
                 </div>

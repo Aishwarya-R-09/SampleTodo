@@ -5,10 +5,7 @@ import EachTodo from './EachTodo';
 export default class Todo extends React.Component{
     constructor(props){
         super(props);
-        this.state = {
-            todoArr : ["Go Shopping", "Complete Project", "Ride Bike"]
-        }
-
+        
     }
     render(){
         return(
@@ -18,12 +15,12 @@ export default class Todo extends React.Component{
                         TODO
                     </h4>
                     <hr id="hr" style={{marginBottom:"25px"}}/>
-                    {this.state.todoArr.map((item, index)=>{
+                    {this.props.arr.map((item)=>{
                         return (
-                            <>
-                                <EachTodo item={item} index={index} type="progress"/>
+                            <React.Fragment key={item[1]}>
+                                <EachTodo item={item[0]} index={item[1]} type="progress"/>
                                 <hr style={{ margin: "20px 0"}}/>
-                            </>
+                            </React.Fragment>
                         )
                     })}
                 </div>

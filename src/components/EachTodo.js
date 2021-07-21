@@ -6,26 +6,35 @@ import { connect } from 'react-redux';
 class EachTodo extends React.Component{
     constructor(props){
         super(props)
+        
         this.state = {
             editMode : false,
-            newValue : props.item
+            newValue : props.item,
+            index : props.index
         }
+    }
+
+    static getDerivedStateFromProps(props,state){
+        if(state.editMode===false){
+            return {...state,newValue: props.item, index: props.index}
+        }
+        return null
     }
 
     // function to remove particular task from store
     deletetask = () => {
         const { dispatch } = this.props;
-        dispatch(removeItem(this.props.index));
+        dispatch(removeItem(this.state.index));
     }
     // function to update completion status in redux store
     completeTask = () => {
         const { dispatch } = this.props;
-        dispatch(updateStatus(this.props.index, "completed"))
+        dispatch(updateStatus(this.state.index, "completed"))
     }
     // function to edit tasks
     updateTask = () => {
         const { dispatch } = this.props;
-        dispatch(updateTask(this.props.index, this.state.newValue));
+        dispatch(updateTask(this.state.index, this.state.newValue));
         this.setState({editMode:false});
     }
 

@@ -1,5 +1,6 @@
 import React from 'react';
 import EachTodo from './EachTodo';
+import NoData from './NoData';
 
 //component to display the completed Todo task
 export default class Completed extends React.Component{
@@ -20,6 +21,10 @@ export default class Completed extends React.Component{
                                 </React.Fragment>
                             )
                         })
+                    }
+                    {
+                        this.props.arr.length === 0 &&
+                        <NoData/>
                     }
                 </div>
             </>

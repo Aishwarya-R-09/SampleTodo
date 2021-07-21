@@ -14,6 +14,10 @@ class AddItem  extends React.Component{
     }
     //function to add a new task to redux store
     addTask = () => {
+        if(this.state.task===""){
+            alert("Enter task to be added");
+            return;
+        }
         const { dispatch } = this.props;
         dispatch(addItem(this.state.task));
         this.setState({task:""});

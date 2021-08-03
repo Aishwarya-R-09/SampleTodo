@@ -3,8 +3,7 @@ import EachTodo from './EachTodo';
 import NoData from './NoData';
 
 //component to display the completed Todo task
-export default class Completed extends React.Component{
-    render(){
+export default function Completed (props){
         return(
             <>
                 <div className="container">
@@ -13,7 +12,7 @@ export default class Completed extends React.Component{
                     </h4>
                     <hr id="hr" style={{marginBottom:"25px"}}/>
                     {
-                        this.props.arr.map((item)=>{
+                        props.arr.map((item)=>{
                             return (
                                 <React.Fragment key={item[1]}>
                                     <EachTodo item={item[0]} index={item[1]} type="completed"/>
@@ -23,11 +22,11 @@ export default class Completed extends React.Component{
                         })
                     }
                     {
-                        this.props.arr.length === 0 &&
+                        props.arr.length === 0 &&
                         <NoData/>
                     }
                 </div>
             </>
         )
-    }
+    
 }

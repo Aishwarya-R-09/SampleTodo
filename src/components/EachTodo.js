@@ -1,92 +1,86 @@
-import React from 'react';
+import React, { useState } from 'react';
 import {removeItem, updateStatus,updateTask} from '../Actions/index'
 import { connect } from 'react-redux';
 
 //component which displays each task which are pending and completed 
-class EachTodo extends React.Component{
-    constructor(props){
-        super(props)
+function EachTodo (props){
+    const [editMode,changeEditMode] = useState(false);
+    const [newValue,changeNewValue] = useState(props.item);
+    const [index] = useState(props.index);
+    
+    
+    
+    if(editMode===false && newValue!== props.item){
+        changeNewValue(props.item);
+    }
         
-        this.state = {
-            editMode : false,
-            newValue : props.item,
-            index : props.index
-        }
-    }
-
-    static getDerivedStateFromProps(props,state){
-        if(state.editMode===false){
-            return {...state,newValue: props.item, index: props.index}
-        }
-        return null
-    }
 
     // function to remove particular task from store
-    deletetask = () => {
-        const { dispatch } = this.props;
-        dispatch(removeItem(this.state.index));
+    function deletetask() {
+        const {dispatch} = props;
+        dispatch(removeItem(index));
     }
     // function to update completion status in redux store
-    completeTask = () => {
-        const { dispatch } = this.props;
-        dispatch(updateStatus(this.state.index, "completed"))
+    function completeTask(){
+        const {dispatch} = props;
+        dispatch(updateStatus(index, "completed"))
     }
     // function to edit tasks
-    updateTask = () => {
-        const { dispatch } = this.props;
-        dispatch(updateTask(this.state.index, this.state.newValue));
-        this.setState({editMode:false});
+    function updateTaskName(){
+        const {dispatch} = props;
+        dispatch(updateTask(index, newValue));
+        changeEditMode(false);
     }
 
-    render(){
-        return(
-            <div className="eachTodo">
-                <div className="task_name">
-                    <input type="checkbox" style={{ marginRight : "30px"}} checked={this.props.type==="completed"} 
-                    readOnly={this.props.type==="completed"} onChange={this.completeTask}/>
+    
+    return(
+        <div className="eachTodo">
+            <div className="task_name">
+                <input type="checkbox" style={{ marginRight : "30px"}} checked={props.type==="completed"} 
+                readOnly={props.type==="completed"} onChange={completeTask}/>
 
-                    <input className={this.state.editMode ? "input": this.props.type==="completed" ? "strike no-input" : "no-input"} 
-                    value={this.state.newValue} onChange={(event)=>{this.setState({newValue:event.target.value})}} 
-                    readOnly={!this.state.editMode}/>
-                    
-                </div>
-                {
-                    !this.state.editMode && 
-                    <div className="task_btn">
-                        {
-                            this.props.type==="progress" && 
-                            <button className="button first" onClick={()=>{this.setState({editMode:true})}}>
-                                <b>
-                                    Edit
-                                </b>
-                            </button>
-                        }
-                        <button className="button" onClick={this.deletetask}>
-                            <b>
-                                Delete
-                            </b>
-                        </button>
-                    </div>
-                }
-
-                {
-                    this.state.editMode && 
-                    <div className="task_btn">
-                        <button className="button first" onClick={this.updateTask}>
-                            <b>
-                                Save
-                            </b>
-                        </button>
-                        <button className="button" onClick={()=>{this.setState({editMode:false,newValue:this.props.item})}}>
-                            <b>
-                                Cancel
-                            </b>
-                        </button>
-                    </div>
-                }
+                <input className={editMode ? "input": props.type==="completed" ? "strike no-input" : "no-input"} 
+                value={newValue} onChange={(event)=>{changeNewValue(event.target.value)}} 
+                readOnly={!editMode}/>
+                
             </div>
-        )
-    }
+            {
+                !editMode && 
+                <div className="task_btn">
+                    {
+                        props.type==="progress" && 
+                        <button className="button first" onClick={()=>{changeEditMode(true)}}>
+                            <b>
+                                Edit
+                            </b>
+                        </button>
+                    }
+                    <button className="button" onClick={deletetask}>
+                        <b>
+                            Delete
+                        </b>
+                    </button>
+                </div>
+            }
+
+            {
+                editMode && 
+                <div className="task_btn">
+                    <button className="button first" onClick={updateTaskName}>
+                        <b>
+                            Save
+                        </b>
+                    </button>
+                    <button className="button" onClick={()=>{ changeEditMode(false); changeNewValue(props.item)}}>
+                        <b>
+                            Cancel
+                        </b>
+                    </button>
+                </div>
+            }
+        </div>
+    )
+    
 }
 
 

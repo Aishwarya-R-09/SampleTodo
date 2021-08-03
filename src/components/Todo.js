@@ -6,7 +6,6 @@ import NoData from './NoData';
 //component to display the pending Todo task
 export default class Todo extends React.Component{
     
-    
     render(){
         return(
             <>

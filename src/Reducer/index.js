@@ -1,7 +1,7 @@
 //Redux reducer
 //Actual logic to perform operations on redux store
 const reducer = (
-    state = { tasks: [] },
+    state = { tasks: [] }, // [ {name:"Pay bills", status:"progress"} , {name:"ride bike",status:"completed"}]
     action
   ) => {
     let temp_tasks;
@@ -16,12 +16,8 @@ const reducer = (
             temp_tasks = [...state.tasks];
             let l = temp_tasks.length;
             let new_tasks;
-            if(action.index === 0){
-                new_tasks = temp_tasks.slice(1,l);
-            }
-            else{
-                new_tasks = temp_tasks.slice(0,action.index).concat(temp_tasks.slice(action.index+1,l));
-            }
+            new_tasks = temp_tasks.slice(0,action.index).concat(temp_tasks.slice(action.index+1,l));
+            
             return { ...state, tasks: new_tasks};
 
         case 'Update Status':
